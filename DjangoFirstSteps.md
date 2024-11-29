@@ -1,8 +1,14 @@
+Arrancar el servidor:
+```bash
+python manage.py runserver
+```
+
+
 1. Crear un entorno virtual y activarlo
 
 ```bash
 python3 -m venv myenv
-source myenv/bin/activate
+myenv/bin/activate
 ```
 
 2. Crear el proyecto de Django

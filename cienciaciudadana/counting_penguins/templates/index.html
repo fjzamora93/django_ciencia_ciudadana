@@ -1,66 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hola Mundo</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
-<body>
-    <!-- Navigation Menu -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+{% extends "layout.html" %}
+{% load static %}
+{% block body %}
+
+<!--- TESTING -->
+
+
 
     <div class="container mt-5">
         <div class="row">
-            <div class="col-md-9">
-                <h1>Titular Principal</h1>
-                <h2>Subtítulo</h2>
-                <img src="https://via.placeholder.com/800x400" class="img-fluid" alt="Imagen de muestra">
-            </div>
-            <div class="col-md-3">
+            <div class="col-md-12">
                 <h3>Herramientas</h3>
-                <ul class="list-group">
+                <ul class="list-group list-group-horizontal">
                     <li class="list-group-item">
-                        <i class="material-icons">brush</i> Dibujo
+                        <button id="draw-button">
+                            <i class="material-icons">my_location</i> Dibujar
+                        </button>
                     </li>
+
+
                     <li class="list-group-item">
-                        <i class="material-icons">delete</i> Borrar
+                        <button id="delete-button">
+                            <i class="material-icons">location_disabled</i> Borrar
+                        </button>
                     </li>
+
+
+                    <form id="coords-form" method="post" action="{% url 'save_coords' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="coords" id="coords-input">
+                        <li class="list-group-item">
+                            <button id="save-button" type="submit">
+                                <i class="material-icons">save</i> Guardar
+                            </button>
+                        </li>
+                    </form>
+
+
                     <li class="list-group-item">
-                        <i class="material-icons">save</i> Guardar
+                        <button id="undo-button">
+                            <i class="material-icons">undo</i> Deshacer
+                        </button>
                     </li>
-                    <li class="list-group-item">
-                        <i class="material-icons">undo</i> Ir hacia atrás
-                    </li>
+
                 </ul>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+  
+    <div class="container">
+        <img 
+        src="https://via.placeholder.com/800x400"
+        alt="Imagen interactiva" 
+        id="imagen" 
+        style="cursor: crosshair;"
+        class="img-fluid"
+        onclick="obtenerCoordenadas(event)" />
+
+        <!-- Canvas superpuesto -->
+        <canvas id="canvas" width="800" height="400"></canvas>
+    </div>
+
+
+
+
+    
+
+{% endblock %}
