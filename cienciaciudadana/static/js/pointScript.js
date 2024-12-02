@@ -1,6 +1,7 @@
 
+
 document.addEventListener('DOMContentLoaded', () => {
-  
+    
     const undoButton = document.getElementById("undo-button");
     const saveButton = document.getElementById("save-button");
     const deleteButton = document.getElementById("delete-button");
@@ -11,17 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
     saveButton.addEventListener("click", saveCoords);
 
     loadCoords()
-     // Ajustar el canvas al cargar la página
-     window.onload = ajustarCanvas;
+     
 
      // Ajustar el canvas si la ventana cambia de tamaño
      window.onresize = ajustarCanvas;
+
+     // Ajustar el canvas al cargar la página
+     window.onload = ajustarCanvas;
 });
 
 var coordsList = [];
 
 function ajustarCanvas() {
-    const img = document.getElementById("imagen");
+    const img = document.getElementById("tile");
     const canvas = document.getElementById("canvas");
 
     // Ajustar las dimensiones del canvas al tamaño real de la imagen
@@ -36,22 +39,37 @@ function ajustarCanvas() {
     const rect = img.getBoundingClientRect();
     canvas.style.top = `${rect.top}px`;
     canvas.style.left = `${rect.left}px`;
+    canvas.style.position = "absolute";
 }
 
 function obtenerCoordenadas(event) {
+    const imgElement = document.getElementById("tile");
+    let srcArray = imgElement.src.split('/');
+    let fileName = srcArray[srcArray.length - 1];
+    let tileName = fileName.split('.')[0];
+
+    console.log("Nombre del tile: " + tileName);
     // Obtener las coordenadas relativas a la imagen
     const x = event.offsetX;
     const y = event.offsetY;
 
 
     console.log(`Coordenadas: X=${x}, Y=${y}`);
-    coordsList.push({ x: x, y: y });
+    coordsList.push({ 
+        tile: tileName,
+        x: x, 
+        y: y 
+    });
 
     drawSquare()
 }
 
 
 function drawSquare(){
+
+    let currentTile = document.getElementById("tile-name-input");
+  
+
     // Obtener el canvas y su contexto
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
@@ -61,18 +79,20 @@ function drawSquare(){
 
     // Dibujar un cuadrado en cada punto de coordsList
     coordsList.forEach(point => {
-        ctx.fillStyle = "#FF0000";
-        ctx.fillRect(point.x, point.y, 10, 10); // Dibuja un cuadrado de 10x10 píxeles
+        if (point.tile == currentTile.value) {
+            ctx.fillStyle = "#FF0000";
+            ctx.fillRect(point.x - 2.5, point.y - 2.5, 5, 5); 
+        }
     });
-  
-
 }
 
 // Aquí solo rellenamos el campo oculto del formulario con las coordenadas
 function saveCoords(event) {
     event.preventDefault();
+    
     const coordsInput = document.getElementById('coords-input');
     coordsInput.value = JSON.stringify(coordsList);
+
     document.getElementById('coords-form').submit();
 }
 
@@ -87,8 +107,8 @@ function loadCoords() {
         .then(response => response.json())
         .then(data => {
             data.forEach(item => {
-                const { x, y } = item;
-                    coordsList.push({ x: parseFloat(x), y: parseFloat(y) });
+                const { x, y, tile } = item;
+                    coordsList.push({ x: parseFloat(x), y: parseFloat(y), tile: tile });
             });
             console.log(coordsList); 
         })

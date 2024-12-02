@@ -1,5 +1,8 @@
 Arrancar el servidor:
 ```bash
+myenv\Scripts\activate
+
+cd cienciaciudadana
 python manage.py runserver
 ```
 
@@ -8,7 +11,10 @@ python manage.py runserver
 
 ```bash
 python3 -m venv myenv
-myenv/bin/activate
+
+
+# DESDE LA CARPETA RAÍZ DEL PROYECTO, ACTIVAR DIRECTAMENTE ASÍ:
+myenv\Scripts\activate
 ```
 
 2. Crear el proyecto de Django
