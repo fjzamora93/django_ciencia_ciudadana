@@ -144,11 +144,9 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ALLOWED_HOSTS = [
-    '.railway.app',
-    'cienciaciudadana-pinguinos.up.railway.ap/',
+    'cienciaciudadana-pinguinos.up.railway.app',
     '127.0.0.1',
     'localhost',
-    'https://pinguiton.up.railway.app',
     'pinguiton.up.railway.app',
 
     
@@ -156,11 +154,11 @@ ALLOWED_HOSTS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://pinguiton.up.railway.app/',
+    'https://pinguiton.up.railway.app',
     'https://web-production-82c5.up.railway.app',
     'http://127.0.0.1',
-    'https://spirited-recreation-production.up.railway.app/',
-    'https://cienciaciudadana-pinguinos.up.railway.app/',
+    'https://spirited-recreation-production.up.railway.app',
+    'https://cienciaciudadana-pinguinos.up.railway.app',
 ]
 
 
