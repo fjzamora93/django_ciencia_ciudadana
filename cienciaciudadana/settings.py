@@ -168,7 +168,7 @@ DJANGO_ENV = config('DJANGO_ENV', default='development')
 if DJANGO_ENV == 'production':
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
-    SECURE_SSL_REDIRECT = True
+    SECURE_SSL_REDIRECT = False
 else:  
     CSRF_COOKIE_SECURE = False
     SESSION_COOKIE_SECURE = False
