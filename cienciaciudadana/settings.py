@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
+    'localhost',
     'https://pinguiton.up.railway.app/', #! TODO REMPLAZAR POR LA URL DE TU PROYECTO, ESTA NO ES
 
 ]
@@ -73,6 +74,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 ROOT_URLCONF = 'cienciaciudadana.urls'
 
