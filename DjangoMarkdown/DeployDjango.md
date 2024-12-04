@@ -1,6 +1,16 @@
 
 Para empaquetar tu proyecto Django en un contenedor Docker y desplegarlo en Railway, sigue estos pasos detallados:
 
+# IMPORTANTE
+
+Después de cada cambio, hay que reconstruir siempre la imagen.
+
+```bash
+docker-compose down
+docker-compose up --build
+```
+
+
 # 1. Configura tu proyecto Django
 Asegúrate de que tu proyecto está listo para producción:
 
