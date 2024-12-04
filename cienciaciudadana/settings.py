@@ -143,27 +143,21 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# El orden de llos hosts influye de alguna manera.. ahora solo me carga la primera
 ALLOWED_HOSTS = [
     'cienciaciudadana-pinguinos.up.railway.app',
     '127.0.0.1',
     'localhost',
-    'pinguiton.up.railway.app',
-
-    
 
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://pinguiton.up.railway.app',
-    'https://web-production-82c5.up.railway.app',
-    'http://127.0.0.1',
-    'https://spirited-recreation-production.up.railway.app',
     'https://cienciaciudadana-pinguinos.up.railway.app',
+    'http://127.0.0.1',
 ]
 
 
-#TODO DESACTIVAR EN LOCAL / ACTIVAR EN PRODUCCIÓN
-
+#! ESTÁ DESACTIVADO EL REDIRIGIMIENTO SEGURO DENTRO DE PRODUCCIÓN
 DJANGO_ENV = config('DJANGO_ENV', default='development')
 if DJANGO_ENV == 'production':
     CSRF_COOKIE_SECURE = True
