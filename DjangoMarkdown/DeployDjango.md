@@ -76,9 +76,13 @@ Construye tu imagen Docker y pruébala localmente antes de desplegarla en Railwa
  Para ello, será necesario tener abierto DockerDescktop.
 
 ```bash
-docker build -t django-app .
+docker build -t nombre-imagen-que-quieras-poner .
 docker run --env-file .env -p 8000:8000 django-app
 ```
+
+Si navegas hasta http://127.0.0.1:8000 deberías ver tu aplicación Django funcionando.
+
+## Posibles errores
 
 En caso de error, podemos añadir el MONGO_URI como un parámetro:
 
@@ -94,6 +98,8 @@ CONTAINER ID   IMAGE        COMMAND                  CREATED          STATUS    
 0e7b644aaac8   django-app   "gunicorn --bind 0.0…"   57 seconds ago   Up 56 seconds   0.0.0.0:8000->8000/tcp   loving_tesla
 ```
 
+Si no aparece esto, quiere decir que algo salió mal. Posiblemente haya algún propelma relacionado con las variables e entorno.
+
 ## Inspeccionar las variables del entorno. 
 
 Es posibe inspeccionar que las variables del entorno están correctamente cargadas así:
@@ -102,3 +108,7 @@ Es posibe inspeccionar que las variables del entorno están correctamente cargad
 docker exec -it loving_tesla /bin/sh
 env
 ```
+
+# 6. Despliega tu aplicación en Railway
+
+Una vez que tu aplicación funciona localmente, despliégala en Railway:
