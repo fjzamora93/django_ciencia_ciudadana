@@ -41,9 +41,11 @@ INSTALLED_APPS = [
 
 ALLOWED_HOSTS = [
     'https://cienciaciudadana-pinguinos.up.railway.app/',
+    'cienciaciudadana-pinguinos.up.railway.app/',
     '127.0.0.1',
     'localhost',
     'https://pinguiton.up.railway.app/',
+    'pinguiton.up.railway.app/',
 
     
 
