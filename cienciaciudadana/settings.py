@@ -42,7 +42,8 @@ INSTALLED_APPS = [
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    'https://pinguiton.up.railway.app/', #! TODO REMPLAZAR POR LA URL DE TU PROYECTO, ESTA NO ES
+    'https://pinguiton.up.railway.app/',
+    'https://cienciaciudadana-pinguinos.up.railway.app/' 
 
 ]
 
@@ -51,6 +52,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://web-production-82c5.up.railway.app',
     'http://127.0.0.1',
     'https://spirited-recreation-production.up.railway.app/',
+    'https://cienciaciudadana-pinguinos.up.railway.app/',
 ]
 
 

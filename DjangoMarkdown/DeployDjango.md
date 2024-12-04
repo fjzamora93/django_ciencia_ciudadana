@@ -76,7 +76,13 @@ Construye tu imagen Docker y pruébala localmente antes de desplegarla en Railwa
  Para ello, será necesario tener abierto DockerDescktop.
 
 ```bash
-docker build -t nombre-imagen-que-quieras-poner .
+docker login
+docker build -t nombre-imagen .
+
+# por ejemplo:
+docker build -t nombre-imagen .
+docker push fjzamora93/nombre-imagen:latest
+
 docker run --env-file .env -p 8000:8000 django-app
 ```
 
