@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block body %}
+
+<!--- TESTING -->
+
+
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="cl-md-10">
+             
+                <img 
+                src="{% static 'img/subrecorte_'|add:number|add:'.jpg' %}"
+        
+                alt="Imagen interactiva" 
+                id="tile" 
+                style="cursor: crosshair;"
+                class="img-fluid"
+                onclick="obtenerCoordenadas(event)" />
+        
+        
+        
+                <!-- Canvas superpuesto -->
+                <canvas id="canvas" width="800" height="400"></canvas>
+    
+            </div>
+            <div class="col-md-2">
+                <h3>Herramientas</h3>
+                <ul class="list-group list-group-vertical">
+                   
+
+
+                    <form id="coords-form" method="post" action="{% url 'save_coords' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="coords" id="coords-input">
+                        <input type="hidden" name="tile" value="{{ tile }}" id="tile-name-input">
+                        <li class="list-group-item">
+                            <button id="save-button" type="submit">
+                                <i class="material-icons">send</i> Enviar
+                            </button>
+                        </li>
+                    </form>
+
+
+                    <li class="list-group-item">
+                        <button id="undo-button">
+                            <i class="material-icons">undo</i> Undo
+                        </button>
+                    </li>
+
+                    <!-- <li class="list-group-item">
+                        <button id="draw-button">
+                            <i class="material-icons">my_location</i> Dibujar
+                        </button>
+                    </li> -->
+
+                </ul>
+            </div>
+
+
+            
+        </div>
+        
+  
+           
+        <p id="coords-list">{{ coords }}</p>
+                  
+             
+             
+
+
+    </div>
+
+  
+    
+
+
+
+    
+
+{% endblock %}
