@@ -13,10 +13,9 @@ from .mongodb import *
 prefix = 'subrecorte'
 
 def hola_mundo(request):
-    #next_tile = increment_tile(f'{prefix}_1')
-    next_tile = 'subrecorte_9'
-    #return redirect(f'/{next_tile}')
-    return render(request, 'hola_mundo.html', {})
+    next_tile = increment_tile(f'{prefix}_1')
+    return redirect(f'/{next_tile}')
+ 
 
 
 
