@@ -21,4 +21,4 @@ RUN python -c "import os; from dotenv import load_dotenv; load_dotenv('.env'); o
 EXPOSE 8000
 
 # Comando para ejecutar la aplicación
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "cienciaciudadana.wsgi"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "cienciaciudadana.wsgi:application"]
