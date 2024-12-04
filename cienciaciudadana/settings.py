@@ -34,36 +34,11 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=True, cast=bool)
 
 
-INSTALLED_APPS = [
-    
-    'counting_penguins',
-]
-
-ALLOWED_HOSTS = [
-    '.railway.app',
-    'cienciaciudadana-pinguinos.up.railway.ap/',
-    '127.0.0.1',
-    'localhost',
-    'https://pinguiton.up.railway.app',
-    'pinguiton.up.railway.app',
-
-    
-
-]
-
-CSRF_TRUSTED_ORIGINS = [
-    'cienciaciudadana-pinguinos.up.railway.ap/',
-    'https://pinguiton.up.railway.app/',
-    'https://web-production-82c5.up.railway.app',
-    'http://127.0.0.1',
-    'https://spirited-recreation-production.up.railway.app/',
-    'https://cienciaciudadana-pinguinos.up.railway.app/',
-]
 
 
 # Application definition
-
 INSTALLED_APPS = [
+    'counting_penguins',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -74,16 +49,16 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 ROOT_URLCONF = 'cienciaciudadana.urls'
@@ -155,6 +130,7 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Si estás en desarrollo, define dónde están tus archivos estáticos
@@ -167,7 +143,25 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+ALLOWED_HOSTS = [
+    '.railway.app',
+    'cienciaciudadana-pinguinos.up.railway.ap/',
+    '127.0.0.1',
+    'localhost',
+    'https://pinguiton.up.railway.app',
+    'pinguiton.up.railway.app',
 
+    
+
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://pinguiton.up.railway.app/',
+    'https://web-production-82c5.up.railway.app',
+    'http://127.0.0.1',
+    'https://spirited-recreation-production.up.railway.app/',
+    'https://cienciaciudadana-pinguinos.up.railway.app/',
+]
 
 
 #TODO DESACTIVAR EN LOCAL / ACTIVAR EN PRODUCCIÓN
