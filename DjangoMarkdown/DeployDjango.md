@@ -85,13 +85,17 @@ Crear un archivo requirements.txt en la raíz del proyecto con las dependencias 
 Construye tu imagen Docker y pruébala localmente antes de desplegarla en Railway.
  Para ello, será necesario tener abierto DockerDescktop.
 
+En tu caso, los repositorios de dockerhub son estos:
+-fjzamora93/pinguiton:latest
+-fjzamora93/tu-imagen:latest
+
 ```bash
 docker login
-docker build -t nombre-imagen .
+docker build -t nombre_imagen .
 
 # por ejemplo:
-docker build -t nombre-imagen .
-docker push fjzamora93/nombre-imagen:latest
+docker build -t nombre_imagen .
+docker push fjzamora93/nombre_imagen:latest
 
 docker run --env-file .env -p 8000:8000 django-app
 ```
