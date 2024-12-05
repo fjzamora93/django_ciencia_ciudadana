@@ -3,7 +3,7 @@ Para empaquetar tu proyecto Django en un contenedor Docker y desplegarlo en Rail
 
 # IMPORTANTE
 
-Después de cada cambio, hay que reconstruir siempre la imagen.
+Después de cada cambio, hay que reconstruir siempre la imagen (solamente para desplegar el Docker, no hace falta si es sobre github)
 
 ```bash
 
@@ -22,13 +22,17 @@ Define correctamente las variables de entorno en tu aplicación.
 
 ```python
 # settings.py
-DEBUG = False
-ALLOWED_HOSTS = ['*']  # Cambia según tus necesidades
+DEBUG = True # Lo recomendable es cambiarlo a False en producción, pero puede ser útil para detectar errores en el despliegue.
+ALLOWED_HOSTS = ['*']  
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 ```
 
-# 2. Recopilación de estáticos
+# 2. Recopilación de estáticos (opcional)
+
+Si vas a servir los archivos estáticos directametne desde el propio proyecto de github, es mejor no hacer la recolección.
+
+Sin embargo, si optas por servirlos desde otro lugar, será necesario hacer la recopilación. En este caso no es necesario.
 
 ```bash
 python manage.py collectstatic --noinput
@@ -79,15 +83,19 @@ myenv/
 # 4. Crea un archivo requirements.txt
 
 Crear un archivo requirements.txt en la raíz del proyecto con las dependencias necesarias para tu aplicación Django.
+Después de realizar todas las instalaciones en tu entorno virtual, puedes generar el archivo de requirements.
 
-
+```bash
+pip freeze > requirements.txt
+```
 
 
 # 5. Abrir Docker Desktop. Construye y prueba tu imagen Docker
 
 Construye tu imagen Docker y pruébala localmente antes de desplegarla en Railway.
- Para ello, será necesario tener abierto DockerDescktop.
+Para ello, será necesario tener abierto DockerDescktop.
 
+### Opcional -> subir el proyecto a DockerHub
 En tu caso, los repositorios de dockerhub son estos:
 -fjzamora93/pinguiton:latest
 -fjzamora93/tu-imagen:latest
@@ -107,16 +115,13 @@ Si navegas hasta http://127.0.0.1:8000 deberías ver tu aplicación Django funci
 
 ## Posibles errores
 
-En caso de error, podemos añadir el MONGO_URI como un parámetro:
-
+Es posible que no esté funcionando, para ello vamos a ver qué imágenes tenemos en Docker:
 
 ```bash
 docker ps
-```
 
-*Deberías ver en pantalla algo como esto:*
 
-```bash
+# Deberías ver en pantalla algo como esto:*
 CONTAINER ID   IMAGE        COMMAND                  CREATED          STATUS          PORTS                    NAMES       
 0e7b644aaac8   django-app   "gunicorn --bind 0.0…"   57 seconds ago   Up 56 seconds   0.0.0.0:8000->8000/tcp   loving_tesla
 ```
@@ -134,4 +139,22 @@ env
 
 # 6. Despliega tu aplicación en Railway
 
-Una vez que tu aplicación funciona localmente, despliégala en Railway:
+Una vez que tu aplicación funciona localmente, despliégala en Railway desde el github. En total, debes asegurarte que dispones de los siguientes archivos en tu repositorio:
+
+```bash	
+raiz_proyecto/
+├── .env
+├── .dockerignore
+├── Dockerfile
+├── requirements.txt
+├── manage.py
+├── cienciaciudadana/
+│   ├── settings.py
+│   ├── urls.py
+│   ├── wsgi.py
+│   ├── asgi.py
+│   ├── __init__.py
+├── myapp/
+├── El resto de tus aplicaciones
+
+```
