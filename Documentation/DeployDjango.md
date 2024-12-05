@@ -6,8 +6,11 @@ Para empaquetar tu proyecto Django en un contenedor Docker y desplegarlo en Rail
 Después de cada cambio, hay que reconstruir siempre la imagen.
 
 ```bash
-docker-compose down
-docker-compose up --build
+
+# por ejemplo:
+docker build -t nombre_imagen .
+docker push fjzamora93/nombre_imagen:latest
+
 ```
 
 
