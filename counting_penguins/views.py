@@ -12,7 +12,12 @@ from .mongodb import *
 
 prefix = 'subrecorte'
 
-def hola_mundo(request):
+
+def home(request):
+    return render(request, 'index.html', {
+        })
+
+def find_tile(request):
     next_tile = increment_tile(f'{prefix}_1')
     return redirect(f'/{next_tile}')
  
@@ -57,12 +62,14 @@ def navigate_to_tile(request, tile):
         return JsonResponse({'message': 'Invalid tile format'}, status=400)
         
     coords = find_by_filter({'tile': tile})
+    num_penguins = count_total()
     print(coords)
     
-    return render(request, 'index.html', {
+    return render(request, 'count_penguins.html', {
         'tile': tile,
         'number' : number,
-        'coords': coords
+        'coords': coords,
+        'count': num_penguins
         })
 
 

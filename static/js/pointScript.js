@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
      // Ajustar el canvas al cargar la página
     
-    
+     updatePenguinCount()
    
 });
 
@@ -70,6 +70,7 @@ function obtenerCoordenadas(event) {
     });
 
     drawSquare()
+    updatePenguinCount()
 }
 
 
@@ -92,6 +93,8 @@ function drawSquare(){
             ctx.fillRect(point.x - 2.5, point.y - 2.5, 5, 5); 
         }
     });
+  
+
 }
 
 // Aquí solo rellenamos el campo oculto del formulario con las coordenadas
@@ -118,6 +121,8 @@ function goBack(){
 }
 
 
+
+
 function loadCoords(callback) {
     const coordsListElement = document.getElementById('coords-list');
     const coordText = coordsListElement.textContent.trim();
@@ -139,4 +144,11 @@ function loadCoords(callback) {
     if (callback) {
         callback();
     }
+}
+
+function updatePenguinCount() {
+    console.log(coordsList.length)
+    const penguinCount = document.getElementById("penguin-count");
+    penguinCount.textContent = coordsList.length;
+    
 }

@@ -78,3 +78,13 @@ def find_by_filter(filtro={}):
     collection = DB[COLLECTION_NAME]
     datos = list(collection.find(filtro))
     return datos
+
+
+def count_total():
+    """
+    Cuenta el total de documentos en la colección.
+    """
+    collection = DB[COLLECTION_NAME]
+    total = collection.count_documents({})
+    return total
+

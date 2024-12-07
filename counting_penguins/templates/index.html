@@ -3,80 +3,35 @@
 {% block body %}
 
 <!--- TESTING -->
+<style>
+    i{
+        display:inline!important;
+        font-size: 20px!important;
+    }
+</style>
 
 
-
-    <div class="container mt-5">
-        <div class="row">
-            <div class="cl-md-10">
-             
-                <img 
-                src="{% static 'img/subrecorte_'|add:number|add:'.jpg' %}"
-        
-                alt="Imagen interactiva" 
-                id="tile" 
-                style="cursor: crosshair;"
-                class="img-fluid"
-                onclick="obtenerCoordenadas(event)" />
-        
-        
-        
-                <!-- Canvas superpuesto -->
-                <canvas id="canvas" width="800" height="400"></canvas>
-    
-            </div>
-            <div class="col-md-2">
-                <h3>Herramientas</h3>
-                <ul class="list-group list-group-vertical">
-                   
-
-
-                    <form id="coords-form" method="post" action="{% url 'save_coords' %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="coords" id="coords-input">
-                        <input type="hidden" name="tile" value="{{ tile }}" id="tile-name-input">
-                        <li class="list-group-item">
-                            <button id="save-button" type="submit">
-                                <i class="material-icons">send</i> Enviar
-                            </button>
-                        </li>
-                    </form>
-
-
-                    <li class="list-group-item">
-                        <button id="undo-button">
-                            <i class="material-icons">undo</i> Undo
-                        </button>
-                    </li>
-
-                    <!-- <li class="list-group-item">
-                        <button id="draw-button">
-                            <i class="material-icons">my_location</i> Dibujar
-                        </button>
-                    </li> -->
-
-                </ul>
-            </div>
-
-
-            
-        </div>
-        
-  
-           
-        <p id="coords-list">{{ coords }}</p>
-                  
-             
-             
-
-
+    <!-- Header Section -->
+    <div class="text-center mb-4">
+        <h1 class="display-5 fw-bold text-primary">¡Bienvenidx a Marcando Pingüinos!</h1>
+        <p class="fs-4 text-muted">
+            Ayúdanos a identificar pingüinos en imágenes aéreas tomadas por drones para contribuir 
+            al estudio y conservación de estas increíbles aves. Aquí te explicamos cómo hacerlo en solo tres pasos:
+        </p>
     </div>
 
-  
-    
+       <!-- Action Button -->
+    <div class="text-center mt-4">
+        <a class="btn btn-primary btn-lg" href="/find-tile">
+            <i class="material-icons align-middle">gps_fixed</i> Marcar Pingüinos
+        </a>
+    </div>
+
+    <br> 
 
 
+ 
 
-    
+        
 
 {% endblock %}
