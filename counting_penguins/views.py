@@ -9,19 +9,22 @@ from django.conf import settings
 from django.contrib.staticfiles.storage import staticfiles_storage
 from .mongodb import *
 
+from counting_penguins.utils.tile_management import *
+
 
 prefix = 'subrecorte'
 
 
 def home(request):
+    num_penguins = count_total()
     return render(request, 'index.html', {
+        'count': num_penguins
         })
 
 def find_tile(request):
     next_tile = increment_tile(f'{prefix}_1')
     return redirect(f'/{next_tile}')
  
-
 
 
 def save_coords(request):
@@ -50,9 +53,6 @@ def save_coords(request):
 
 
 def navigate_to_tile(request, tile):
-    test_connection()
-    print(f"Valor de tile recibido: {tile}")
-    coords = []
     if '_' in tile:
         try:
             number = tile.split('_')[1]
@@ -60,11 +60,17 @@ def navigate_to_tile(request, tile):
             return JsonResponse({'message': 'Invalid tile format'}, status=400)
     else:
         return JsonResponse({'message': 'Invalid tile format'}, status=400)
-        
+
+  
+    # Si no está disponible, redirigir al siguiente tile
+    if not is_tile_available(tile) or already_marked(tile):
+        next_tile = increment_tile(tile)
+        return redirect(reverse('navigate_to_tile', args=[next_tile]))
+    
+    # Marcar el tile como ocupado
+    occupy_tile(tile)
     coords = find_by_filter({'tile': tile})
     num_penguins = count_total()
-    print(coords)
-    
     return render(request, 'count_penguins.html', {
         'tile': tile,
         'number' : number,
@@ -111,9 +117,6 @@ def increment_tile(current_tile):
                 return next_tile
 
         next_number += 1
-
-        
-
     return None
 
 
@@ -121,3 +124,6 @@ def increment_tile(current_tile):
 
 def no_more_tiles():
     return render(request, 'no_more_tiles.html', {})
+
+
+

@@ -1,0 +1,34 @@
+{
+    "tile_1": {
+        "status": "occupied",
+        "timestamp": 1684166800
+    },
+    "tile_2": {
+        "status": "available",
+        "timestamp": null
+    },
+    "subrecorte_9": {
+        "status": "occupied",
+        "timestamp": 1733931777.080632
+    },
+    "subrecorte_14": {
+        "status": "available",
+        "timestamp": null
+    },
+    "subrecorte_29": {
+        "status": "available",
+        "timestamp": null
+    },
+    "subrecorte_34": {
+        "status": "available",
+        "timestamp": null
+    },
+    "subrecorte_35": {
+        "status": "available",
+        "timestamp": null
+    },
+    "subrecorte_39": {
+        "status": "occupied",
+        "timestamp": 1733931839.8129978
+    }
+}

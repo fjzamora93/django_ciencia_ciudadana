@@ -20,12 +20,30 @@
         </p>
     </div>
 
+    <!-- Contador Total de Pingüinos -->
+    <div class="card mb-3 border-light shadow-sm rounded">
+        <div class="card-body text-center">
+            <h5 class="card-title text-muted">
+                🐧 Pingüinos contados hasta ahora
+            </h5>
+            <p class="h5 text-dark mb-0">{{count}}</p>
+        </div>
+    </div>
+
        <!-- Action Button -->
     <div class="text-center mt-4">
         <a class="btn btn-primary btn-lg" href="/find-tile">
             <i class="material-icons align-middle">gps_fixed</i> Marcar Pingüinos
         </a>
+        <br><br>
+        <!-- Switch  -->
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="customSwitch1" value="false">
+            <label class="form-check-label" for="customSwitch1">Repetir imaágenes que ya estén marcadas</label>
+        </div>
     </div>
+
+    
 
     <br> 
 

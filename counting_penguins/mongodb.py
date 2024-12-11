@@ -88,3 +88,11 @@ def count_total():
     total = collection.count_documents({})
     return total
 
+
+def already_marked(tile_name:str) -> bool:
+    """
+    Verifica si un tile está disponible.
+    """
+    collection = DB[COLLECTION_NAME]
+    total = collection.count_documents({'tile': tile_name})
+    return total != 0
