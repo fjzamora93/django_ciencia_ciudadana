@@ -43,18 +43,41 @@
                             
                             <!-- Save Button -->
                             <div class="d-grid mb-3">
-                                <button id="save-button" type="submit" class="btn btn-primary btn-block">
+                                <button id="save-button" type="submit" class="btn btn-primary btn-block" value="true" name="save">
                                     <i class="material-icons align-middle">send</i> Enviar
                                 </button>
                             </div>
+                       
+                            <!-- Save Button -->
+                            <div class="d-grid mb-3">
+                                <button id="save-button-false" type="submit" class="btn btn-secondary btn-block" value="false" name="not-save">
+                                    <i class="material-icons align-middle">help</i> No estoy seguro
+                                </button>
+                            </div>
+
                         </form>
-            
+                        
+                        <!-- TODO: ARCHIVAR IMAGEN SIN COORDS -->
+                        <form id="coords-form" method="post" action="{% url 'save_coords' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="coords" id="coords-input">
+                            <input type="hidden" name="tile" value="{{ tile }}" id="tile-name-input">
+                            
+                            <div class="d-grid">
+                                <button id="report" class="btn btn-danger btn-block">
+                                    <i class="material-icons align-middle">report</i> No hay pingüinos
+                                    <input type="hidden" name="no-penguins" value="no-penguins">
+                                </button>
+                            </div><br>
+                        </form>
+
                         <!-- Undo Button -->
                         <div class="d-grid">
                             <button id="undo-button" class="btn btn-warning btn-block">
                                 <i class="material-icons align-middle">undo</i> Undo
                             </button>
                         </div>
+
                         <!-- Contador Pingüinos en Tile -->
                         <div class="card mb-4 border-light">
                             <div class="card-body text-center">

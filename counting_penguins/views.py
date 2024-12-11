@@ -16,41 +16,40 @@ prefix = 'subrecorte'
 
 
 def home(request):
+    if request.method == 'POST':
+        repeat_marked = request.POST.get('repeat_marked') == 'true'
+        request.session['repeat_marked'] = repeat_marked
+    else:
+        repeat_marked = request.session.get('repeat_marked', True)
+    
     num_penguins = count_total()
     return render(request, 'index.html', {
-        'count': num_penguins
-        })
+        'count': num_penguins,
+        'repeat_marked': repeat_marked
+    })
 
 def find_tile(request):
+    repeat_marked = request.GET.get("repeat_marked") == "true"
+    request.session['repeat_marked'] = repeat_marked
+
     next_tile = increment_tile(f'{prefix}_1')
     return redirect(f'/{next_tile}')
  
 
 
 def save_coords(request):
+    current_tile = request.POST.get('tile', '{prefix}_0')
+    next_tile = increment_tile(current_tile)
+    to_save = request.POST.get('save') == "true"  
+
     if request.method == 'POST':
-        try:
-            current_tile = request.POST.get('tile', '{prefix}_0')
+        if to_save:
             clear_tile(current_tile)
-            
             coords_list = json.loads(request.POST.get('coords', '[]'))
-            for coord in coords_list:
-                print("Coordenada a insertar", coord)
-                insertar_dato_en_coleccion(coord)
-            
-
-            print(coords_list)
-
-            
-
-            next_tile = increment_tile(current_tile)  
-            print("Redirigiendo a ", next_tile, " desde el tile actual que es: ", current_tile)
-            return redirect(reverse('navigate_to_tile', args=[next_tile]))
-
-        except json.JSONDecodeError:
-            return JsonResponse({'message': 'Invalid JSON data'}, status=400)
-    return JsonResponse({'message': 'Invalid request'}, status=400)
-
+            for coord in coords_list: insertar_dato_en_coleccion(coord) 
+            print("Guardando", coords_list)
+    return redirect(reverse('navigate_to_tile', args=[next_tile]))
+   
 
 def navigate_to_tile(request, tile):
     if '_' in tile:
@@ -60,10 +59,14 @@ def navigate_to_tile(request, tile):
             return JsonResponse({'message': 'Invalid tile format'}, status=400)
     else:
         return JsonResponse({'message': 'Invalid tile format'}, status=400)
-
   
     # Si no está disponible, redirigir al siguiente tile
-    if not is_tile_available(tile) or already_marked(tile):
+    # if not is_tile_available(tile):
+    #     next_tile = increment_tile(tile)
+    #     return redirect(reverse('navigate_to_tile', args=[next_tile]))
+    
+    # Verificar que está activada la función de repetir tiles
+    if already_marked(tile) and not request.session.get('repeat_marked'):
         next_tile = increment_tile(tile)
         return redirect(reverse('navigate_to_tile', args=[next_tile]))
     
@@ -71,6 +74,7 @@ def navigate_to_tile(request, tile):
     occupy_tile(tile)
     coords = find_by_filter({'tile': tile})
     num_penguins = count_total()
+    print(coords)
     return render(request, 'count_penguins.html', {
         'tile': tile,
         'number' : number,
@@ -101,7 +105,6 @@ def increment_tile(current_tile):
     while True:
         if next_number > 500:
             break
-        print("Número actual", next_number)
 
         next_tile = f'{prefix}_{next_number}'
         img_path = os.path.join(settings.BASE_DIR, 'static', 'img', f'{next_tile}.jpg')

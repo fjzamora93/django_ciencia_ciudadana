@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% load static %}
 {% block body %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!--- TESTING -->
 <style>
@@ -32,15 +33,18 @@
 
        <!-- Action Button -->
     <div class="text-center mt-4">
-        <a class="btn btn-primary btn-lg" href="/find-tile">
-            <i class="material-icons align-middle">gps_fixed</i> Marcar Pingüinos
-        </a>
-        <br><br>
-        <!-- Switch  -->
-        <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="customSwitch1" value="false">
-            <label class="form-check-label" for="customSwitch1">Repetir imaágenes que ya estén marcadas</label>
-        </div>
+        <form method="get" action="{% url 'find_tile' %}" id="search-tile-form">
+            <button class="btn btn-primary btn-lg" type="submit">
+                <i class="material-icons align-middle">gps_fixed</i> Marcar Pingüinos
+            </button>
+            <br><br>
+            <!-- Switch: solo se enviará el valor de 'true' en caso de que el checkbox se marque  -->
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="customSwitch1" name="repeat_marked" value="true" {% if repeat_marked %}checked{% endif %}>
+                
+                <label class="form-check-label" for="customSwitch1">Repetir imágenes marcadas</label>
+            </div>
+        </form>
     </div>
 
     

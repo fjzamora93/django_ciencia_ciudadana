@@ -49,7 +49,6 @@ def insertar_dato_en_coleccion(dato:dict) -> int:
 
     collection = DB[COLLECTION_NAME]
     result = collection.insert_one(dato)
-    print("DATO FORMATEADO: ", dato)
     return result.inserted_id
 
 
