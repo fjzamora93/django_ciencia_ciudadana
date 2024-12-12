@@ -31,16 +31,36 @@
             display: inline;
         }
     
+        #footer p{
+            color: white!important;
+        }
 
+        #home{
+            font-size: 50px!important;
+            margin-left: 5vw;
+            text-align: center;
+            justify-content: center;
+        }
+        #home i{
+            display: inline;
+        }
+        #home span{
+            font-size: 20px;
+        }
     </style>
 
 </head>
 
 <!-- Navigation Menu -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="nav-link" href="/">
-        <i class="material-icons">home</i>  <span class="sr-only">(current)</span>
+    <a class="nav-link d-flex align-items-center" href="/" id="home">
+        <i class="material-icons mr-2">home</i>
+        <span>Página principal</span>
+        <span class="sr-only">(current)</span>
     </a>
+ 
+        
+   
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -122,7 +142,7 @@
     
 </body>
 
-<footer class="bg-dark text-white py-4">
+<footer class="bg-dark text-white py-4" id="footer">
     <div class="container-fluid">
         <div class="row">
             <!-- Sección de información -->

@@ -50,26 +50,19 @@
                        
                             <!-- Save Button -->
                             <div class="d-grid mb-3">
-                                <button id="save-button-false" type="submit" class="btn btn-secondary btn-block" value="false" name="not-save">
+                                <button id="save-button-false" type="submit" class="btn btn-secondary btn-block" value="false" name="save">
                                     <i class="material-icons align-middle">help</i> No estoy seguro
                                 </button>
                             </div>
 
+                            <div class="d-grid mb-3">
+                                <button id="report" class="btn btn-danger btn-block" type="submit" value="no-penguins" name="save">
+                                    <i class="material-icons align-middle">report</i> No hay pingüinos
+                                </button>
+                            </div> 
+
                         </form>
                         
-                        <!-- TODO: ARCHIVAR IMAGEN SIN COORDS -->
-                        <form id="coords-form" method="post" action="{% url 'save_coords' %}">
-                            {% csrf_token %}
-                            <input type="hidden" name="coords" id="coords-input">
-                            <input type="hidden" name="tile" value="{{ tile }}" id="tile-name-input">
-                            
-                            <div class="d-grid">
-                                <button id="report" class="btn btn-danger btn-block">
-                                    <i class="material-icons align-middle">report</i> No hay pingüinos
-                                    <input type="hidden" name="no-penguins" value="no-penguins">
-                                </button>
-                            </div><br>
-                        </form>
 
                         <!-- Undo Button -->
                         <div class="d-grid">
