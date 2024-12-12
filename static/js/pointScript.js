@@ -8,9 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     saveButton.addEventListener("click", saveCoords);
 
     ajustarCanvas();
-    console.log("Cargando coordenadas...");
     loadCoords(drawSquare);
-
     window.onscroll = () =>{
         ajustarCanvas();
         drawSquare();
@@ -22,10 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         drawSquare();
     } 
 
-     // Ajustar el canvas al cargar la página
-    
-    
-   
+     updatePenguinCount()
 });
 
 var coordsList = [];
@@ -70,52 +65,42 @@ function obtenerCoordenadas(event) {
     });
 
     drawSquare()
+    updatePenguinCount()
+    saveCoords() 
 }
 
 
 function drawSquare(){
-
     let currentTile = document.getElementById("tile-name-input");
-  
-
     // Obtener el canvas y su contexto
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
 
     // Limpiar el canvas antes de dibujar
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Dibujar un cuadrado en cada punto de coordsList
     coordsList.forEach(point => {
         if (point.tile == currentTile.value) {
             ctx.fillStyle = "#FF0000";
             ctx.fillRect(point.x - 2.5, point.y - 2.5, 5, 5); 
         }
     });
+  
 }
 
 // Aquí solo rellenamos el campo oculto del formulario con las coordenadas
-function saveCoords(event) {
-    event.preventDefault();
-
+function saveCoords() {
     const coordsInput = document.getElementById('coords-input');
-    
-    // Filtrar datos mal formados (opcional)
-    const validCoords = coordsList.filter(coord => {
-        return coord && coord.tile && !isNaN(coord.x) && !isNaN(coord.y);
-    });
-
     coordsInput.value = JSON.stringify(coordsList);
-    console.log("Este es el JSON que se va a guardar: ", coordsInput.value);
-
-    document.getElementById('coords-form').submit();
 }
 
 
 function goBack(){
     coordsList.pop();
     drawSquare();
+   
 }
+
+
 
 
 function loadCoords(callback) {
@@ -139,4 +124,11 @@ function loadCoords(callback) {
     if (callback) {
         callback();
     }
+}
+
+function updatePenguinCount() {
+    console.log(coordsList.length)
+    const penguinCount = document.getElementById("penguin-count");
+    penguinCount.textContent = coordsList.length;
+    
 }

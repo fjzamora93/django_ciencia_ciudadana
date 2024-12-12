@@ -2,11 +2,9 @@ button{
     padding: 10px;
 }
 
-
-/* Contenedor que agrupa imagen y canvas */
-.container {
-    margin: 20px;
-
+#mi-div{
+    background-color: aqua;
+    color: cadetblue;
 }
 
 /* Imagen base */

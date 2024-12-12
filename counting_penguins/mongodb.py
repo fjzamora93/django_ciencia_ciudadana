@@ -49,7 +49,6 @@ def insertar_dato_en_coleccion(dato:dict) -> int:
 
     collection = DB[COLLECTION_NAME]
     result = collection.insert_one(dato)
-    print("DATO FORMATEADO: ", dato)
     return result.inserted_id
 
 
@@ -78,3 +77,21 @@ def find_by_filter(filtro={}):
     collection = DB[COLLECTION_NAME]
     datos = list(collection.find(filtro))
     return datos
+
+
+def count_total():
+    """
+    Cuenta el total de documentos en la colección.
+    """
+    collection = DB[COLLECTION_NAME]
+    total = collection.count_documents({})
+    return total
+
+
+def already_marked(tile_name:str) -> bool:
+    """
+    Verifica si un tile está disponible.
+    """
+    collection = DB[COLLECTION_NAME]
+    total = collection.count_documents({'tile': tile_name})
+    return total != 0

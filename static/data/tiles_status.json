@@ -1,0 +1,50 @@
+{
+    "tile_1": {
+        "status": "occupied",
+        "timestamp": 1684166800
+    },
+    "tile_2": {
+        "status": "available",
+        "timestamp": null
+    },
+    "subrecorte_9": {
+        "status": "occupied",
+        "timestamp": 1733953958.039985
+    },
+    "subrecorte_14": {
+        "status": "occupied",
+        "timestamp": 1733953963.1212547
+    },
+    "subrecorte_29": {
+        "status": "occupied",
+        "timestamp": 1733953966.0414379
+    },
+    "subrecorte_34": {
+        "status": "occupied",
+        "timestamp": 1733953952.775566
+    },
+    "subrecorte_35": {
+        "status": "available",
+        "timestamp": null
+    },
+    "subrecorte_39": {
+        "status": "occupied",
+        "timestamp": 1733952494.5648174
+    },
+    "subrecorte_48": {
+        "status": "occupied",
+        "timestamp": 1733952508.8381958
+    },
+    "subrecorte_49": {
+        "status": "occupied",
+        "timestamp": 1733949200.8714254
+    },
+    "subrecorte_55": {
+        "status": "occupied",
+        "timestamp": 1733949213.8391657
+    },
+    "subrecorte_56": {
+        "status": "occupied",
+        "timestamp": 1733949243.0963888
+    }
+}
