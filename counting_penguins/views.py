@@ -12,6 +12,7 @@ from . import mongodb as db
 
 from counting_penguins.utils.tile_management import *
 
+import counting_penguins.utils.coords_converter as coords_converter
 
 prefix = 'subrecorte'
 
@@ -48,7 +49,7 @@ def save_coords(request):
         if to_save:
             clear_tile(current_tile)
             coords_list = json.loads(request.POST.get('coords', '[]'))
-            for coord in coords_list: insertar_dato_en_coleccion(coord) 
+            insert_many_coords(coords_list) 
         elif no_penguins:
             clear_tile(current_tile)
             db.classify_tile_without_penguin({

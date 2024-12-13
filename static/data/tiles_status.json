@@ -9,31 +9,31 @@
     },
     "subrecorte_9": {
         "status": "occupied",
-        "timestamp": 1734010437.465947
+        "timestamp": 1734098566.0429912
     },
     "subrecorte_14": {
         "status": "occupied",
-        "timestamp": 1734010448.8791301
+        "timestamp": 1734098347.9042964
     },
     "subrecorte_29": {
         "status": "occupied",
-        "timestamp": 1734010446.038488
+        "timestamp": 1734098350.2901301
     },
     "subrecorte_34": {
         "status": "occupied",
-        "timestamp": 1733953952.775566
+        "timestamp": 1734098352.9060013
     },
     "subrecorte_35": {
-        "status": "available",
-        "timestamp": null
+        "status": "occupied",
+        "timestamp": 1734098355.4214349
     },
     "subrecorte_39": {
         "status": "occupied",
-        "timestamp": 1733952494.5648174
+        "timestamp": 1734098572.505658
     },
     "subrecorte_48": {
         "status": "occupied",
-        "timestamp": 1733952508.8381958
+        "timestamp": 1734098561.2492216
     },
     "subrecorte_49": {
         "status": "occupied",
