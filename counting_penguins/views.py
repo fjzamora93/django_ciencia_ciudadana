@@ -50,6 +50,9 @@ def save_coords(request):
             clear_tile(current_tile)
             coords_list = json.loads(request.POST.get('coords', '[]'))
             insert_many_coords(coords_list) 
+
+            #! Hacemos la inserción en la colección con georeferencia
+            #insert_pixel_to_coordinates(coords_list)
         elif no_penguins:
             clear_tile(current_tile)
             db.classify_tile_without_penguin({
