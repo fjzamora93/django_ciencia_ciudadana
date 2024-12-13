@@ -2,7 +2,7 @@
 
 import os
 import csv
-import rasterio
+#import rasterio
 import pandas as pd
 
 # Function to get bounds of a TIFF file
