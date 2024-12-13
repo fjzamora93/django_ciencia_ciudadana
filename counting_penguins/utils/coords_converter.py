@@ -2,7 +2,7 @@
 from django.conf import settings
 import os
 import csv
-import rasterio
+#import rasterio
 import pandas as pd
 
 
