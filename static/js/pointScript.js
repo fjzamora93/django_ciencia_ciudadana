@@ -59,9 +59,12 @@ function obtenerCoordenadas(event) {
 
     console.log(`Coordenadas: X=${x}, Y=${y}`);
     coordsList.push({ 
+        class: 0,
+        x_center: x, 
+        y_center: y,
+        width: 30,
+        height: 30,
         tile: tileName,
-        x: x, 
-        y: y 
     });
 
     drawSquare()
@@ -80,8 +83,17 @@ function drawSquare(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     coordsList.forEach(point => {
         if (point.tile == currentTile.value) {
-            ctx.fillStyle = "#FF0000";
-            ctx.fillRect(point.x - 2.5, point.y - 2.5, 5, 5); 
+            // Calcular la esquina superior izquierda de la caja
+            const x_start = point.x_center - point.width / 2;
+            const y_start = point.y_center - point.height / 2;
+
+            // Establecer el estilo de relleno
+            ctx.strokeStyle = "#FF0000";
+            ctx.lineWidth = 2;
+
+            // Dibujar la caja
+            ctx.strokeRect(x_start, y_start, point.width, point.height);
+
         }
     });
   

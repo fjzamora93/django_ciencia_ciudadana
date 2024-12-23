@@ -8,6 +8,7 @@ from django.shortcuts import redirect
 from django.conf import settings
 from django.contrib.staticfiles.storage import staticfiles_storage
 from .mongodb import *
+from . import mongodb as db
 
 from counting_penguins.utils.tile_management import *
 
@@ -16,6 +17,8 @@ prefix = 'subrecorte'
 
 
 def home(request):
+    all_penguins_done = request.session.get('all_penguins_done', False) 
+
     if request.method == 'POST':
         repeat_marked = request.POST.get('repeat_marked') == 'true'
         request.session['repeat_marked'] = repeat_marked
@@ -25,38 +28,46 @@ def home(request):
     num_penguins = count_total()
     return render(request, 'index.html', {
         'count': num_penguins,
-        'repeat_marked': repeat_marked
+        'repeat_marked': repeat_marked,
+        'all_penguins_done': all_penguins_done
     })
 
 def find_tile(request):
     repeat_marked = request.GET.get("repeat_marked") == "true"
     request.session['repeat_marked'] = repeat_marked
-
-    next_tile = increment_tile(f'{prefix}_1')
+    next_tile = increment_tile(request,f'{prefix}_1')
     return redirect(f'/{next_tile}')
  
 
-
 def save_coords(request):
-    current_tile = request.POST.get('tile', '{prefix}_0')
-    next_tile = increment_tile(current_tile)
-    to_save = request.POST.get('save') == "true"  
 
+    current_tile = request.POST.get('tile', '{prefix}_0')
+    next_tile = increment_tile(request, current_tile)
+    to_save = request.POST.get('save') == "true"  
+    no_penguins = request.POST.get('save') == "no-penguins"
     if request.method == 'POST':
         if to_save:
             clear_tile(current_tile)
             coords_list = json.loads(request.POST.get('coords', '[]'))
-            for coord in coords_list: insertar_dato_en_coleccion(coord) 
-            print("Guardando", coords_list)
+            
+            if len(coords_list) > 0:
+                insert_many_coords(coords_list) 
+
+            #! Hacemos la inserción en la colección con georeferencia
+            #insert_pixel_to_coordinates(coords_list)
+        elif no_penguins:
+            clear_tile(current_tile)
+            db.classify_tile_without_penguin({
+                'tile': current_tile,
+                'has_penguin': False
+            })
     return redirect(reverse('navigate_to_tile', args=[next_tile]))
+
    
 
 def navigate_to_tile(request, tile):
     if '_' in tile:
-        try:
-            number = tile.split('_')[1]
-        except IndexError:
-            return JsonResponse({'message': 'Invalid tile format'}, status=400)
+        number = tile.split('_')[1]
     else:
         return JsonResponse({'message': 'Invalid tile format'}, status=400)
   
@@ -66,8 +77,8 @@ def navigate_to_tile(request, tile):
     #     return redirect(reverse('navigate_to_tile', args=[next_tile]))
     
     # Verificar que está activada la función de repetir tiles
-    if already_marked(tile) and not request.session.get('repeat_marked'):
-        next_tile = increment_tile(tile)
+    if not db.already_marked(tile) and not request.session.get('repeat_marked'):
+        next_tile = increment_tile(request, tile)
         return redirect(reverse('navigate_to_tile', args=[next_tile]))
     
     # Marcar el tile como ocupado
@@ -83,7 +94,7 @@ def navigate_to_tile(request, tile):
         })
 
 
-def increment_tile(current_tile):
+def increment_tile(request, current_tile):
     """
     Calcula el siguiente tile basado en los siguientes criterios:
     - El primer tile disponible (verificar si el tile 1 existe, si no existe, pasa al siguiente).
@@ -97,14 +108,15 @@ def increment_tile(current_tile):
     Si no existen más tiles, aparecerá un mensaje de que no quedan más tiles disponibles.
     """
 
-
+    print("TILE ACTUAL QUE VAMOS A INCREMENTAR: ", current_tile)
     prefix, number = current_tile.rsplit('_', 1)
     next_number = int(number) + 1
     contador = 0
-
+    request.session['all_penguins_done'] = False
     while True:
         if next_number > 500:
-            break
+            request.session['all_penguins_done'] = True
+            return redirect(f'/')
 
         next_tile = f'{prefix}_{next_number}'
         img_path = os.path.join(settings.BASE_DIR, 'static', 'img', f'{next_tile}.jpg')
@@ -121,12 +133,5 @@ def increment_tile(current_tile):
 
         next_number += 1
     return None
-
-
-
-
-def no_more_tiles():
-    return render(request, 'no_more_tiles.html', {})
-
 
 

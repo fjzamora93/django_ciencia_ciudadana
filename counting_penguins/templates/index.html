@@ -31,23 +31,31 @@
         </div>
     </div>
 
-       <!-- Action Button -->
-    <div class="text-center mt-4">
-        <form method="get" action="{% url 'find_tile' %}" id="search-tile-form">
-            <button class="btn btn-primary btn-lg" type="submit">
-                <i class="material-icons align-middle">gps_fixed</i> Marcar Pingüinos
-            </button>
-            <br><br>
-            <!-- Switch: solo se enviará el valor de 'true' en caso de que el checkbox se marque  -->
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="customSwitch1" name="repeat_marked" value="true" {% if repeat_marked %}checked{% endif %}>
-                
-                <label class="form-check-label" for="customSwitch1">Repetir imágenes marcadas</label>
-            </div>
-        </form>
-    </div>
-
-    
+  
+    {% if all_penguins_done %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>¡Oops!</strong> Actualmente todos los pingüinos han sido marcados. 
+            Si te interesa colaborar, no dudes en consultar nuestras redes sociales, 
+            ya que posiblemente en poco tiempo lanzaremos una nueva campaña.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% else %}
+        <!-- Action Button -->
+        <div class="text-center mt-4">
+            <form method="get" action="{% url 'find_tile' %}" id="search-tile-form">
+                <button class="btn btn-primary btn-lg" type="submit">
+                    <i class="material-icons align-middle">gps_fixed</i> Marcar Pingüinos
+                </button>
+                <br><br>
+                <!-- Switch: solo se enviará el valor de 'true' en caso de que el checkbox se marque  -->
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="customSwitch1" name="repeat_marked" value="true" {% if repeat_marked %}checked{% endif %}>
+                    
+                    <label class="form-check-label" for="customSwitch1">Repetir imágenes marcadas</label>
+                </div>
+            </form>
+        </div>
+    {% endif %}
 
     <br> 
 

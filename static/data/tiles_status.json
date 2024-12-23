@@ -9,31 +9,31 @@
     },
     "subrecorte_9": {
         "status": "occupied",
-        "timestamp": 1733953958.039985
+        "timestamp": 1734099948.9157283
     },
     "subrecorte_14": {
         "status": "occupied",
-        "timestamp": 1733953963.1212547
+        "timestamp": 1734098347.9042964
     },
     "subrecorte_29": {
         "status": "occupied",
-        "timestamp": 1733953966.0414379
+        "timestamp": 1734098350.2901301
     },
     "subrecorte_34": {
         "status": "occupied",
-        "timestamp": 1733953952.775566
+        "timestamp": 1734098352.9060013
     },
     "subrecorte_35": {
-        "status": "available",
-        "timestamp": null
+        "status": "occupied",
+        "timestamp": 1734098355.4214349
     },
     "subrecorte_39": {
         "status": "occupied",
-        "timestamp": 1733952494.5648174
+        "timestamp": 1734098572.505658
     },
     "subrecorte_48": {
         "status": "occupied",
-        "timestamp": 1733952508.8381958
+        "timestamp": 1734099203.3573873
     },
     "subrecorte_49": {
         "status": "occupied",
@@ -46,5 +46,33 @@
     "subrecorte_56": {
         "status": "occupied",
         "timestamp": 1733949243.0963888
+    },
+    "subrecorte_2": {
+        "status": "occupied",
+        "timestamp": 1734957011.1518304
+    },
+    "subrecorte_3": {
+        "status": "occupied",
+        "timestamp": 1734957065.6087184
+    },
+    "subrecorte_4": {
+        "status": "occupied",
+        "timestamp": 1734957068.4841743
+    },
+    "subrecorte_5": {
+        "status": "occupied",
+        "timestamp": 1734957317.8910007
+    },
+    "subrecorte_6": {
+        "status": "occupied",
+        "timestamp": 1734957320.2519488
+    },
+    "subrecorte_7": {
+        "status": "occupied",
+        "timestamp": 1734957330.583787
+    },
+    "subrecorte_8": {
+        "status": "occupied",
+        "timestamp": 1734957336.7386756
     }
 }
