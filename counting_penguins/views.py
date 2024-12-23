@@ -12,7 +12,6 @@ from . import mongodb as db
 
 from counting_penguins.utils.tile_management import *
 
-import counting_penguins.utils.coords_converter as coords_converter
 
 prefix = 'subrecorte'
 

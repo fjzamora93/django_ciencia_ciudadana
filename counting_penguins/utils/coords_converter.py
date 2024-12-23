@@ -2,9 +2,25 @@
 from django.conf import settings
 import os
 import csv
-#import rasterio
+
+
+#! import rasterio REMPLAZAR RASTERI POR PILLOW, PROBLEMAS DE DESPLIEGUE EN RAILWAY
 import pandas as pd
 
+"""
+A la hora de hacer la conversión de coords a píxeles, se deben seguir los siguientes pasos:
+
+1. Cargar las coordenadas de las esquinas de las imágenes en un DataFrame. El dataframe sigue la siguiente estructura:
+
+[file, x_top, y_top, x_bot, y_bot]
+
+Al cortar cada tile (para incluirlo en esta web), automáticamente se debe generar un CSV que recoja las coordenadas de las esquinas. 
+
+2. El segundo paso es simplemente hacer la conversión de los píxeles a coordenadas geográficas, 
+teniendo como referencia las coordenadas de las esquinas de la imagen que están en el csv, y los píxeles marcados en la imagen.
+
+3. El código para calcular las coordenadas geográficas de las imágenes originales -en tif- está en el repositorio de CountingPenguins de Github.
+"""
 
 
 # Function to get bounds of a TIFF file

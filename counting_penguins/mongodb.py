@@ -120,7 +120,7 @@ def already_marked(tile_name:str) -> bool:
 
 
 
-#! Leer función antes de usarla
+#! FUNCIÓN AÚN NO LISTA, NECESITA RASTERIO (PROBLEMAS CON LA INSTALACIÓN)
 def insert_pixel_to_coordinates(coords_list: list[dict]) -> bool:
     """
     Convierte las coordenadas de los pixeles a coordenadas geográficas y las inserta en la base de datos.

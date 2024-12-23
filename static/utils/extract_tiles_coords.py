@@ -12,6 +12,7 @@ def get_image_bounds(tiff_path:str) -> tuple:
     La función transform*(0,0) se encarga de devolver el sistema georeferneciasa del archivo (NO en píxeles).
 
     Args:
+    
     - tiff_path: str, ruta completa del archivo TIFF.
     """
     with rasterio.open(tiff_path) as src:
