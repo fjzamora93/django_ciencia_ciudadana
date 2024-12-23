@@ -31,9 +31,14 @@
         </div>
     </div>
 
-
-    {% if no_penguins_remaining %}
-        <p> No quedan pingüinos </p>
+  
+    {% if all_penguins_done %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>¡Oops!</strong> Actualmente todos los pingüinos han sido marcados. 
+            Si te interesa colaborar, no dudes en consultar nuestras redes sociales, 
+            ya que posiblemente en poco tiempo lanzaremos una nueva campaña.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     {% else %}
         <!-- Action Button -->
         <div class="text-center mt-4">
