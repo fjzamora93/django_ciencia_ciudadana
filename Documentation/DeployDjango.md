@@ -8,8 +8,8 @@ Después de cada cambio, hay que reconstruir siempre la imagen (solamente para d
 ```bash
 
 # por ejemplo:
-docker build -t nombre_imagen .
-docker push fjzamora93/nombre_imagen:latest
+docker build -t pinguiton .
+docker push fjzamora93/pinguiton:latest
 
 ```
 

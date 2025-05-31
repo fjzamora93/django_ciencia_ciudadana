@@ -12,13 +12,12 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from decouple import config
 from pathlib import Path
 import os
-import environ
 
 # Inicializar django-environ
-env = environ.Env()
-environ.Env.read_env('.env')
-MONGO_URI = env('MONGO_URI')
 
+MONGO_URI = config('MONGO_URI')
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DJANGO_DEBUG', default=True, cast=bool)
 
 
 
