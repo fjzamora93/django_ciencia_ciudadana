@@ -16,7 +16,7 @@ import os
 # Inicializar django-environ
 
 MONGO_URI = config('MONGO_URI')
-SECRET_KEY = config('SECRET_KEY')
+print("DEBUG: MONGO_URI =", MONGO_URI)
 DEBUG = config('DJANGO_DEBUG', default=True, cast=bool)
 
 
